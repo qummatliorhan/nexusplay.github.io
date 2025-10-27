@@ -26,13 +26,15 @@
       justify-content: space-between;
       align-items: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-      position: relative;
-      z-index: 10;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     .logo {
       font-size: 1.8rem;
       font-weight: 700;
       color: #4ecca3;
+      cursor: pointer;
     }
     nav ul {
       display: flex;
@@ -43,36 +45,55 @@
       color: #e0e0e0;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s;
+      transition: color 0.3s, transform 0.2s;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
     }
     nav a:hover {
       color: #4ecca3;
+      transform: scale(1.05);
     }
     main {
       max-width: 1200px;
       margin: 2rem auto;
       padding: 0 20px;
     }
-    .hero {
-      text-align: center;
-      padding: 2rem 0;
-      margin-bottom: 2rem;
-    }
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #fff;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #aaa;
-    }
     section {
       margin-bottom: 3rem;
+      padding: 2rem 0;
     }
     h2 {
+      font-size: 2rem;
       margin-bottom: 1.5rem;
       color: #4ecca3;
+      text-align: center;
+      position: relative;
+    }
+    h2::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: #4ecca3;
+      margin: 1rem auto;
+    }
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .category-tab {
+      padding: 0.7rem 1.5rem;
+      background: #16213e;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .category-tab:hover, .category-tab.active {
+      background: #4ecca3;
+      color: #0f0f15;
     }
     .news-grid {
       display: grid;
@@ -83,15 +104,21 @@
       background: #16213e;
       border-radius: 10px;
       overflow: hidden;
-      transition: transform 0.3s;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
     .news-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
     }
     .news-card img {
       width: 100%;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .news-card:hover img {
+      transform: scale(1.05);
     }
     .news-card-content {
       padding: 1.2rem;
@@ -99,10 +126,12 @@
     .news-card h3 {
       margin-bottom: 0.5rem;
       color: #fff;
+      font-size: 1.2rem;
     }
     .news-card p {
       color: #bbb;
       font-size: 0.95rem;
+      margin-bottom: 0.5rem;
     }
     .news-card .date {
       font-size: 0.85rem;
@@ -125,6 +154,7 @@
       border: 1px solid #4ecca3;
       color: #e0e0e0;
       border-radius: 5px;
+      font-family: inherit;
     }
     .contact-form button {
       background: #4ecca3;
@@ -134,6 +164,10 @@
       font-weight: bold;
       border-radius: 5px;
       cursor: pointer;
+      transition: background 0.3s;
+    }
+    .contact-form button:hover {
+      background: #3cb894;
     }
     footer {
       text-align: center;
@@ -141,8 +175,8 @@
       background: #1a1a2e;
       color: #777;
       margin-top: 3rem;
+      border-top: 1px solid #333;
     }
-
     /* Мобильное меню */
     .menu-toggle {
       display: none;
@@ -168,6 +202,7 @@
         padding: 1rem;
         gap: 1rem;
         display: none;
+        z-index: 99;
       }
       nav ul.show {
         display: flex;
@@ -175,13 +210,19 @@
       .menu-toggle {
         display: flex;
       }
+      .logo {
+        font-size: 1.5rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">GameHub</div>
+    <div class="logo" onclick="window.location.hash = '#home'; window.location.reload();">GameHub</div>
     <div class="menu-toggle" onclick="toggleMenu()">
       <span></span>
       <span></span>
@@ -198,17 +239,22 @@
   </header>
 
   <main>
-    <section class="hero" id="home">
-      <h1>Все новости мира игр — здесь и сейчас</h1>
-      <p>Актуальные анонсы, обзоры и аналитика — только проверенная информация.</p>
-    </section>
-
-    <!-- НОВОСТИ -->
-    <section id="news">
-      <h2>Последние новости</h2>
+    <!-- ГЛАВНАЯ -->
+    <section id="home">
+      <div class="hero" style="text-align: center; padding: 3rem 0;">
+        <h1 style="font-size: 2.8rem; margin-bottom: 1rem; color: #fff;">Все новости мира игр — здесь и сейчас</h1>
+        <p style="font-size: 1.2rem; color: #aaa; max-width: 800px; margin: 0 auto;">Актуальные анонсы, обзоры и аналитика — только проверенная информация. Выбирайте категории и читайте лучшие материалы.</p>
+      </div>
+      <div class="category-tabs">
+        <div class="category-tab active">Все игры</div>
+        <div class="category-tab">Экшены</div>
+        <div class="category-tab">RPG</div>
+        <div class="category-tab">Стратегии</div>
+        <div class="category-tab">Инди</div>
+      </div>
       <div class="news-grid">
         <div class="news-card">
-          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Starfield+Update" alt="Starfield">
+          <img src="https://via.placeholder.com/300x200/16213e/4ecca3?text=Starfield+Update" alt="Starfield">
           <div class="news-card-content">
             <h3>Starfield получит масштабное обновление</h3>
             <p>Разработчики Bethesda анонсировали крупный патч с исправлениями и новым контентом.</p>
@@ -216,7 +262,7 @@
           </div>
         </div>
         <div class="news-card">
-          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=GTA+6+Trailer" alt="GTA 6">
+          <img src="https://via.placeholder.com/300x200/16213e/4ecca3?text=GTA+6+Trailer" alt="GTA 6">
           <div class="news-card-content">
             <h3>Rockstar показала новый трейлер GTA 6</h3>
             <p>Официальный ролик собрал рекордное количество просмотров за первые сутки.</p>
@@ -224,15 +270,29 @@
           </div>
         </div>
         <div class="news-card">
-          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Elden+Ring+DLC" alt="Elden Ring DLC">
+          <img src="https://via.placeholder.com/300x200/16213e/4ecca3?text=Elden+Ring+DLC" alt="Elden Ring DLC">
           <div class="news-card-content">
             <h3>Вышло DLC «Тени древа» для Elden Ring</h3>
             <p>Новый сюжетный контент уже доступен на всех платформах.</p>
             <div class="date">8 апреля 2025</div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- НОВОСТИ -->
+    <section id="news" style="display: none;">
+      <h2>Последние новости</h2>
+      <div class="category-tabs">
+        <div class="category-tab active">Все</div>
+        <div class="category-tab">Экшены</div>
+        <div class="category-tab">RPG</div>
+        <div class="category-tab">Стратегии</div>
+        <div class="category-tab">Инди</div>
+      </div>
+      <div class="news-grid">
         <div class="news-card">
-          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Call+of+Duty" alt="Call of Duty">
+          <img src="https://via.placeholder.com/300x200/16213e/4ecca3?text=Call+of+Duty" alt="Call of Duty">
           <div class="news-card-content">
             <h3>Call of Duty: Black Ops 6 — дата выхода объявлена</h3>
             <p>Новая часть легендарной серии выйдет уже этой осенью.</p>
@@ -240,7 +300,7 @@
           </div>
         </div>
         <div class="news-card">
-          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=The+Legend+of+Zelda" alt="Zelda">
+          <img src="https://via.placeholder.com/300x200/16213e/4ecca3?text=The+Legend+of+Zelda" alt="Zelda">
           <div class="news-card-content">
             <h3>Анонсирована новая игра по Zelda</h3>
             <p>Nintendo представила продолжение Breath of the Wild.</p>
@@ -248,22 +308,37 @@
           </div>
         </div>
         <div class="news-card">
-          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=PlayStation+6" alt="PS6">
+          <img src="https://via.placeholder.com/300x200/16213e/4ecca3?text=PlayStation+6" alt="PS6">
           <div class="news-card-content">
             <h3>PlayStation 6 выйдет в 2027 году</h3>
             <p>Sony подтвердила планы по следующему поколению консолей.</p>
             <div class="date">1 апреля 2025</div>
           </div>
         </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x200/16213e/4ecca3?text=Helldivers+2" alt="Helldivers 2">
+          <div class="news-card-content">
+            <h3>Helldivers 2 — кооператив года?</h3>
+            <p>Почему эта игра захватила миллионы игроков по всему миру.</p>
+            <div class="date">20 марта 2025</div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ОБЗОРЫ -->
-    <section id="reviews">
+    <section id="reviews" style="display: none;">
       <h2>Обзоры игр</h2>
+      <div class="category-tabs">
+        <div class="category-tab active">Все</div>
+        <div class="category-tab">Экшены</div>
+        <div class="category-tab">RPG</div>
+        <div class="category-tab">Стратегии</div>
+        <div class="category-tab">Инди</div>
+      </div>
       <div class="news-grid">
         <div class="news-card">
-          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Обзор+GTA6" alt="GTA 6 Review">
+          <img src="https://via.placeholder.com/300x200/16213e/4ecca3?text=Обзор+GTA6" alt="GTA 6 Review">
           <div class="news-card-content">
             <h3>GTA 6: стоит ли ждать?</h3>
             <p>Разбираем всё, что известно о самой ожидаемой игре десятилетия.</p>
@@ -271,26 +346,34 @@
           </div>
         </div>
         <div class="news-card">
-          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Обзор+Helldivers2" alt="Helldivers 2">
-          <div class="news-card-content">
-            <h3>Helldivers 2 — кооператив года?</h3>
-            <p>Почему эта игра захватила миллионы игроков по всему миру.</p>
-            <div class="date">20 марта 2025</div>
-          </div>
-        </div>
-        <div class="news-card">
-          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Обзор+Palworld" alt="Palworld">
+          <img src="https://via.placeholder.com/300x200/16213e/4ecca3?text=Обзор+Palworld" alt="Palworld">
           <div class="news-card-content">
             <h3>Palworld: Покемоны с оружием</h3>
             <p>Смешной, странный, но удивительно увлекательный хит.</p>
             <div class="date">15 марта 2025</div>
           </div>
         </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x200/16213e/4ecca3?text=Обзор+Cyberpunk" alt="Cyberpunk">
+          <div class="news-card-content">
+            <h3>Cyberpunk 2077 — финальный обзор после всех обновлений</h3>
+            <p>Как из провала получился шедевр? Мы разобрали все изменения.</p>
+            <div class="date">10 марта 2025</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x200/16213e/4ecca3?text=Обзор+Red+Dead" alt="Red Dead">
+          <div class="news-card-content">
+            <h3>Red Dead Redemption 2 — почему это лучшая игра десятилетия?</h3>
+            <p>Мир, история, персонажи — всё идеально. Рассказываем почему.</p>
+            <div class="date">5 марта 2025</div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- КОНТАКТЫ -->
-    <section id="contacts">
+    <section id="contacts" style="display: none;">
       <h2>Связаться с нами</h2>
       <div class="contact-form">
         <form action="https://formspree.io/f/твой-хэш" method="POST">
@@ -308,7 +391,7 @@
 
   <footer>
     <p>© 2025 GameHub — Игровые новости и обзоры</p>
-    <p>Все права защищены.</p>
+    <p>Все права защищены. Сделано с любовью к играм.</p>
   </footer>
 
   <script>
@@ -316,10 +399,39 @@
       const nav = document.getElementById('nav-list');
       nav.classList.toggle('show');
     }
+
+    // Переключение между страницами
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        document.querySelectorAll('section').forEach(section => {
+          section.style.display = 'none';
+        });
+        document.getElementById(targetId).style.display = 'block';
+        if (targetId === 'home') {
+          document.querySelector('.logo').click();
+        }
+      });
+    });
+
+    // Активация текущей страницы при загрузке
+    window.addEventListener('hashchange', function() {
+      const hash = window.location.hash.substring(1) || 'home';
+      document.querySelectorAll('section').forEach(section => {
+        section.style.display = 'none';
+      });
+      document.getElementById(hash).style.display = 'block';
+    });
+
+    // Инициализация первой страницы
+    window.addEventListener('load', function() {
+      const hash = window.location.hash.substring(1) || 'home';
+      document.querySelectorAll('section').forEach(section => {
+        section.style.display = 'none';
+      });
+      document.getElementById(hash).style.display = 'block';
+    });
   </script>
 </body>
 </html>
-</body>
-
-</html>
-
