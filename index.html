@@ -26,6 +26,8 @@
       justify-content: space-between;
       align-items: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      position: relative;
+      z-index: 10;
     }
     .logo {
       font-size: 1.8rem;
@@ -65,6 +67,13 @@
       font-size: 1.2rem;
       color: #aaa;
     }
+    section {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      margin-bottom: 1.5rem;
+      color: #4ecca3;
+    }
     .news-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -100,6 +109,32 @@
       color: #4ecca3;
       margin-top: 0.5rem;
     }
+    .contact-form {
+      background: #16213e;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      background: #0f0f15;
+      border: 1px solid #4ecca3;
+      color: #e0e0e0;
+      border-radius: 5px;
+    }
+    .contact-form button {
+      background: #4ecca3;
+      color: #0f0f15;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
     footer {
       text-align: center;
       padding: 2rem;
@@ -107,20 +142,38 @@
       color: #777;
       margin-top: 3rem;
     }
-    @media (max-width: 600px) {
+
+    /* Мобильное меню */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #e0e0e0;
+      margin: 3px 0;
+      transition: 0.3s;
+    }
+    @media (max-width: 768px) {
       nav ul {
-        gap: 1rem;
-        flex-direction: column;
         position: absolute;
         top: 70px;
         left: 0;
         width: 100%;
         background: #1a1a2e;
+        flex-direction: column;
+        align-items: center;
         padding: 1rem;
+        gap: 1rem;
         display: none;
       }
-      header {
-        flex-wrap: wrap;
+      nav ul.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: flex;
       }
     }
   </style>
@@ -129,8 +182,13 @@
 
   <header>
     <div class="logo">GameHub</div>
-    <nav>
-      <ul>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav id="main-nav">
+      <ul id="nav-list">
         <li><a href="#home">Главная</a></li>
         <li><a href="#news">Новости</a></li>
         <li><a href="#reviews">Обзоры</a></li>
@@ -145,8 +203,9 @@
       <p>Актуальные анонсы, обзоры и аналитика — только проверенная информация.</p>
     </section>
 
+    <!-- НОВОСТИ -->
     <section id="news">
-      <h2 style="margin-bottom: 1.5rem; color: #4ecca3;">Последние новости</h2>
+      <h2>Последние новости</h2>
       <div class="news-grid">
         <div class="news-card">
           <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Starfield+Update" alt="Starfield">
@@ -172,15 +231,95 @@
             <div class="date">8 апреля 2025</div>
           </div>
         </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Call+of+Duty" alt="Call of Duty">
+          <div class="news-card-content">
+            <h3>Call of Duty: Black Ops 6 — дата выхода объявлена</h3>
+            <p>Новая часть легендарной серии выйдет уже этой осенью.</p>
+            <div class="date">5 апреля 2025</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=The+Legend+of+Zelda" alt="Zelda">
+          <div class="news-card-content">
+            <h3>Анонсирована новая игра по Zelda</h3>
+            <p>Nintendo представила продолжение Breath of the Wild.</p>
+            <div class="date">3 апреля 2025</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=PlayStation+6" alt="PS6">
+          <div class="news-card-content">
+            <h3>PlayStation 6 выйдет в 2027 году</h3>
+            <p>Sony подтвердила планы по следующему поколению консолей.</p>
+            <div class="date">1 апреля 2025</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ОБЗОРЫ -->
+    <section id="reviews">
+      <h2>Обзоры игр</h2>
+      <div class="news-grid">
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Обзор+GTA6" alt="GTA 6 Review">
+          <div class="news-card-content">
+            <h3>GTA 6: стоит ли ждать?</h3>
+            <p>Разбираем всё, что известно о самой ожидаемой игре десятилетия.</p>
+            <div class="date">27 марта 2025</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Обзор+Helldivers2" alt="Helldivers 2">
+          <div class="news-card-content">
+            <h3>Helldivers 2 — кооператив года?</h3>
+            <p>Почему эта игра захватила миллионы игроков по всему миру.</p>
+            <div class="date">20 марта 2025</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Обзор+Palworld" alt="Palworld">
+          <div class="news-card-content">
+            <h3>Palworld: Покемоны с оружием</h3>
+            <p>Смешной, странный, но удивительно увлекательный хит.</p>
+            <div class="date">15 марта 2025</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section id="contacts">
+      <h2>Связаться с нами</h2>
+      <div class="contact-form">
+        <form action="https://formspree.io/f/твой-хэш" method="POST">
+          <input type="text" name="name" placeholder="Ваше имя" required>
+          <input type="email" name="email" placeholder="Ваш email" required>
+          <textarea name="message" rows="5" placeholder="Сообщение" required></textarea>
+          <button type="submit">Отправить</button>
+        </form>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #aaa;">
+          Или пишите напрямую: <a href="mailto:gamehub@example.com" style="color:#4ecca3;">gamehub@example.com</a>
+        </p>
       </div>
     </section>
   </main>
 
-  <footer id="contacts">
+  <footer>
     <p>© 2025 GameHub — Игровые новости и обзоры</p>
-    <p>Контакты: gamehub@example.com</p>
+    <p>Все права защищены.</p>
   </footer>
 
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('nav-list');
+      nav.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>
 </body>
 
 </html>
+
