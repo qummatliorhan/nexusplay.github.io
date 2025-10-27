@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Игровые новости, обзоры и анонсы — всё о мире видеоигр в одном месте." />
+  <title>GameHub — Новости игр</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #0f0f15;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    header {
+      background: #1a1a2e;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #4ecca3;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+    nav a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #4ecca3;
+    }
+    main {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 20px;
+    }
+    .hero {
+      text-align: center;
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #aaa;
+    }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .news-card {
+      background: #16213e;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .news-card:hover {
+      transform: translateY(-5px);
+    }
+    .news-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .news-card-content {
+      padding: 1.2rem;
+    }
+    .news-card h3 {
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .news-card p {
+      color: #bbb;
+      font-size: 0.95rem;
+    }
+    .news-card .date {
+      font-size: 0.85rem;
+      color: #4ecca3;
+      margin-top: 0.5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #1a1a2e;
+      color: #777;
+      margin-top: 3rem;
+    }
+    @media (max-width: 600px) {
+      nav ul {
+        gap: 1rem;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #1a1a2e;
+        padding: 1rem;
+        display: none;
+      }
+      header {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">GameHub</div>
+    <nav>
+      <ul>
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#news">Новости</a></li>
+        <li><a href="#reviews">Обзоры</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <h1>Все новости мира игр — здесь и сейчас</h1>
+      <p>Актуальные анонсы, обзоры и аналитика — только проверенная информация.</p>
+    </section>
+
+    <section id="news">
+      <h2 style="margin-bottom: 1.5rem; color: #4ecca3;">Последние новости</h2>
+      <div class="news-grid">
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Starfield+Update" alt="Starfield">
+          <div class="news-card-content">
+            <h3>Starfield получит масштабное обновление</h3>
+            <p>Разработчики Bethesda анонсировали крупный патч с исправлениями и новым контентом.</p>
+            <div class="date">12 апреля 2025</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=GTA+6+Trailer" alt="GTA 6">
+          <div class="news-card-content">
+            <h3>Rockstar показала новый трейлер GTA 6</h3>
+            <p>Официальный ролик собрал рекордное количество просмотров за первые сутки.</p>
+            <div class="date">10 апреля 2025</div>
+          </div>
+        </div>
+        <div class="news-card">
+          <img src="https://via.placeholder.com/300x180/16213e/4ecca3?text=Elden+Ring+DLC" alt="Elden Ring DLC">
+          <div class="news-card-content">
+            <h3>Вышло DLC «Тени древа» для Elden Ring</h3>
+            <p>Новый сюжетный контент уже доступен на всех платформах.</p>
+            <div class="date">8 апреля 2025</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacts">
+    <p>© 2025 GameHub — Игровые новости и обзоры</p>
+    <p>Контакты: gamehub@example.com</p>
+  </footer>
+
+</body>
+</html>
