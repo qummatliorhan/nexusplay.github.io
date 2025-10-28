@@ -1,28 +1,53 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta name="yandex-verification" content="503028df73117d8a" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="NexusPlay — мрачный игровой портал с глубокими обзорами, анонсами и эксклюзивным контентом." />
-  <meta name="keywords" content="NexusPlay, игры, новости, обзоры, GTA 6, Elden Ring, Starfield, Hades II">
-  <title>NexusPlay — Игровая Вселенная</title>
+  <meta name="keywords" content="NexusPlay, игры, новости, обзоры, GTA 6, Elden Ring, Starfield, Hades II, Cyberpunk 2078">
+  <meta name="yandex-verification" content="503028df73117d8a" />
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="NexusPlay — Игровая Вселенная">
+  <meta property="og:description" content="Свежие новости, обзоры и анонсы самых ожидаемых игр 2025 года.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://qummatliorhan.github.io/">
+  <meta property="og:image" content="https://qummatliorhan.github.io/assets/og-image.jpg">
+  
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
+  <title>NexusPlay — Игровая Вселенная</title>
+  <style id="theme-styles">
+    :root {
+      --bg-primary: #090910;
+      --bg-secondary: #12121f;
+      --card-bg: #151528;
+      --text-primary: #f0f0ff;
+      --text-secondary: #bbb;
+      --accent: #ff6b6b;
+      --border: #2d2d45;
+    }
+    .light-theme {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-primary: #1a1a2e;
+      --text-secondary: #555;
+      --accent: #d43a3a;
+      --border: #e0e0e0;
+    }
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
     body {
-      background: linear-gradient(rgba(10, 10, 20, 0.88), rgba(15, 15, 30, 0.92)),
-                   url('https://images.unsplash.com/photo-1622263063200-6f1b7e4e2e8a?auto=format&fit=crop&w=1920&q=80');
-      background-size: cover;
-      background-attachment: fixed;
-      background-position: center;
-      color: #f0f0ff;
+      background: var(--bg-primary);
+      color: var(--text-primary);
       font-family: 'Inter', sans-serif;
       line-height: 1.7;
+      transition: background 0.4s ease, color 0.4s ease;
     }
     header {
       background: rgba(8, 8, 16, 0.92);
@@ -31,7 +56,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #2a2a40;
+      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -39,86 +64,159 @@
     .logo {
       font-family: 'Orbitron', sans-serif;
       font-size: 2.2rem;
-      background: linear-gradient(90deg, #ff6b6b, #d4af37);
+      background: linear-gradient(90deg, var(--accent), #d4af37);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       letter-spacing: 1px;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 5px rgba(255,107,107,0.5); }
+      to { text-shadow: 0 0 20px rgba(255,107,107,0.8); }
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      position: relative;
+    }
+    nav a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: var(--card-bg);
+      min-width: 180px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      z-index: 101;
+      border-radius: 8px;
+      top: 100%;
+      left: 0;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown-content a {
+      color: var(--text-primary);
+      padding: 12px 16px;
+      display: block;
+      font-size: 0.95rem;
+    }
+    .dropdown-content a:hover {
+      background: rgba(255,107,107,0.1);
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.4rem;
+      cursor: pointer;
     }
     .hero {
       text-align: center;
-      padding: 3rem 5% 2rem;
+      padding: 4rem 5% 2rem;
+      background: linear-gradient(rgba(9,9,16,0.7), rgba(9,9,16,0.9)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920&h=400&q=70');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed; /* параллакс */
+      color: white;
     }
     .hero h1 {
-      font-size: 2.8rem;
+      font-size: 3.2rem;
       margin-bottom: 1rem;
-      color: #fff;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
-    .hero p {
-      color: #aaa;
-      max-width: 700px;
-      margin: 0 auto;
+    .search-box {
+      max-width: 600px;
+      margin: 1.5rem auto;
+    }
+    #search {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 50px;
+      border: 2px solid var(--accent);
+      background: rgba(0,0,0,0.3);
+      color: white;
       font-size: 1.1rem;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .tab {
+      padding: 0.6rem 1.5rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+    .tab.active {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
     }
     .games-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 2.8rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2.5rem;
       padding: 0 5% 4rem;
     }
     .game-card {
-      background: rgba(15, 15, 28, 0.7);
+      background: var(--card-bg);
       border-radius: 16px;
       overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      border: 1px solid #2d2d45;
+      transition: all 0.4s ease;
+      border: 1px solid var(--border);
       position: relative;
     }
     .game-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-      border-color: #4a4a6a;
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
     }
     .game-image {
       width: 100%;
-      height: 220px;
+      height: 200px;
       object-fit: cover;
     }
     .game-content {
-      padding: 1.5rem;
+      padding: 1.4rem;
     }
     .game-title {
-      font-size: 1.45rem;
-      margin-bottom: 0.7rem;
-      color: #fff;
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+      color: var(--text-primary);
     }
     .game-excerpt {
-      color: #bbb;
-      font-size: 0.98rem;
-      margin-bottom: 1.2rem;
-      line-height: 1.6;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
     }
     .meta {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-    }
-    .date {
-      font-size: 0.88rem;
-      color: #aaa;
-    }
-    .genre {
-      background: linear-gradient(90deg, #ff6b6b, #d4af37);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
+      color: var(--accent);
     }
     footer {
       text-align: center;
-      padding: 2.2rem;
-      color: #666;
-      font-size: 0.95rem;
-      border-top: 1px solid #222;
+      padding: 2rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
       margin-top: 2rem;
     }
     .overlay-link {
@@ -135,70 +233,267 @@
 
   <header>
     <div class="logo">NEXUSPLAY</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="about.html">О нас</a></li>
+        <li class="dropdown">
+          <a href="#">Жанры <i class="fas fa-chevron-down"></i></a>
+          <div class="dropdown-content">
+            <a href="#" data-genre="action">Экшен</a>
+            <a href="#" data-genre="rpg">Ролевые</a>
+            <a href="#" data-genre="strategy">Стратегии</a>
+            <a href="#" data-genre="indie">Инди</a>
+          </div>
+        </li>
+        <li><a href="contacts.html">Контакты</a></li>
+      </ul>
+    </nav>
+    <div class="controls">
+      <button class="theme-toggle" id="theme-toggle" title="Сменить тему">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
   </header>
 
   <section class="hero">
     <h1>Игровая Вселенная в Тьме</h1>
     <p>Эксклюзивные новости, глубокие обзоры и анонсы самых ожидаемых игр — только на NexusPlay.</p>
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Поиск по играм...">
+    </div>
   </section>
 
-  <div class="games-grid">
-    <div class="game-card">
-      <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&h=220&q=80" alt="GTA 6">
-      <div class="game-content">
-        <h3 class="game-title">GTA 6 — Дата релиза подтверждена</h3>
-        <p class="game-excerpt">Rockstar Games объявила, что игра выйдет 26 ноября 2025 года. Самый громкий релиз десятилетия.</p>
-        <div class="meta">
-          <span class="date">28 апреля 2025</span>
-          <span class="genre">Экшен / Приключения</span>
-        </div>
-      </div>
-      <a href="game/gta6.html" target="_blank" class="overlay-link" aria-label="Открыть страницу GTA 6"></a>
-    </div>
+  <div class="tabs">
+    <div class="tab active" data-tab="news">Новости</div>
+    <div class="tab" data-tab="reviews">Обзоры</div>
+  </div>
 
-    <div class="game-card">
-      <img src="https://images.unsplash.com/photo-1622263063200-6f1b7e4e2e8a?auto=format&fit=crop&w=600&h=220&q=80" alt="Elden Ring DLC">
-      <div class="game-content">
-        <h3 class="game-title">Elden Ring: Shadow of the Erdtree</h3>
-        <p class="game-excerpt">FromSoftware анонсировала дату выхода — 21 июня 2025. Более 30 часов нового контента.</p>
-        <div class="meta">
-          <span class="date">25 апреля 2025</span>
-          <span class="genre">RPG / Экшен</span>
-        </div>
-      </div>
-      <a href="game/eldenring-dlc.html" target="_blank" class="overlay-link" aria-label="Открыть страницу Elden Ring DLC"></a>
-    </div>
-
-    <div class="game-card">
-      <img src="https://images.unsplash.com/photo-1612237377021-744a4b3d2e8f?auto=format&fit=crop&w=600&h=220&q=80" alt="Starfield DLC">
-      <div class="game-content">
-        <h3 class="game-title">Starfield: Shattered Space</h3>
-        <p class="game-excerpt">Bethesda выпустит масштабное DLC с новой планетой, фракциями и сюжетной линией.</p>
-        <div class="meta">
-          <span class="date">22 апреля 2025</span>
-          <span class="genre">Sci-Fi RPG</span>
-        </div>
-      </div>
-      <a href="game/starfield-dlc.html" target="_blank" class="overlay-link" aria-label="Открыть страницу Starfield DLC"></a>
-    </div>
-
-    <div class="game-card">
-      <img src="https://images.unsplash.com/photo-1551103782-8ab3a7137f33?auto=format&fit=crop&w=600&h=220&q=80" alt="Hades II">
-      <div class="game-content">
-        <h3 class="game-title">Hades II — Полный релиз</h3>
-        <p class="game-excerpt">Supergiant Games завершает разработку культовой инди-игры. Выход — летом 2025.</p>
-        <div class="meta">
-          <span class="date">15 апреля 2025</span>
-          <span class="genre">Инди / Рогалик</span>
-        </div>
-      </div>
-      <a href="game/hades2.html" target="_blank" class="overlay-link" aria-label="Открыть страницу Hades II"></a>
-    </div>
+  <div class="games-grid" id="games-container">
+    <!-- Игры будут загружены скриптом -->
   </div>
 
   <footer>
     &copy; 2025 NexusPlay — Игровая Вселенная в Тьме. Все права защищены.
   </footer>
 
+  <script>
+    // Данные об играх (15 шт.)
+    const games = [
+      {
+        title: "GTA 6 — Первый трейлер и дата выхода",
+        excerpt: "Rockstar подтвердила релиз на 26 ноября 2025 года. Действие — в Vice City и окрестностях.",
+        date: "28 апреля 2025",
+        genre: "action",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "gta6"
+      },
+      {
+        title: "Elden Ring: Shadow of the Erdtree — дата выхода",
+        excerpt: "FromSoftware анонсировала DLC на 21 июня 2025 года. Обещают 30+ часов геймплея.",
+        date: "25 апреля 2025",
+        genre: "rpg",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1622263063200-6f1b7e4e2e8a?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "elden-ring-shadow"
+      },
+      {
+        title: "Обзор: GTA 6 — революция в open world",
+        excerpt: "Разбираем всё, что известно о самой ожидаемой игре десятилетия.",
+        date: "27 апреля 2025",
+        genre: "action",
+        type: "review",
+        image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "gta6"
+      },
+      {
+        title: "Starfield: Shattered Space — крупнейшее DLC",
+        excerpt: "Bethesda выпустит масштабное дополнение с новой планетой и сюжетной линией.",
+        date: "22 апреля 2025",
+        genre: "rpg",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1612237377021-744a4b3d2e8f?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "starfield-shattered-space"
+      },
+      {
+        title: "Hades II выходит из раннего доступа",
+        excerpt: "Supergiant Games объявила, что полная версия выйдет в июне 2025.",
+        date: "15 апреля 2025",
+        genre: "indie",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1551103782-8ab3a7137f33?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "hades2"
+      },
+      {
+        title: "Cyberpunk 2078 — анонсирована новая игра",
+        excerpt: "CD Projekt Red подтвердила разработку продолжения культовой RPG.",
+        date: "10 мая 2025",
+        genre: "rpg",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "cyberpunk-2078"
+      },
+      {
+        title: "Hollow Knight: Silksong — дата выхода!",
+        excerpt: "Team Cherry анонсировала релиз на 15 августа 2025 года.",
+        date: "5 мая 2025",
+        genre: "indie",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "hollow-knight-silksong"
+      },
+      {
+        title: "Call of Duty: Black Ops 6 — трейлер",
+        excerpt: "Новая часть выйдет 25 октября 2025. Действие — в 90-е годы.",
+        date: "20 апреля 2025",
+        genre: "action",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1511512578047-dfb3670e508d?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "black-ops-6"
+      },
+      {
+        title: "The Legend of Zelda: Echoes of Wisdom",
+        excerpt: "Nintendo анонсировала новую Zelda с Принцессой Зельдой в роли главной героини.",
+        date: "18 апреля 2025",
+        genre: "action",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "zelda-echoes"
+      },
+      {
+        title: "Palworld 2 — разработка подтверждена",
+        excerpt: "Pocketpair объявила о работе над сиквелом хита 2024 года.",
+        date: "10 апреля 2025",
+        genre: "indie",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1631701175700-7e5a0a9a8e3b?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "palworld-2"
+      },
+      {
+        title: "Fable — новая информация от Playground Games",
+        excerpt: "Разработчики показали концепт-арты и подтвердили открытый мир.",
+        date: "8 апреля 2025",
+        genre: "rpg",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "fable"
+      },
+      {
+        title: "Total War: Warhammer III — финальное DLC",
+        excerpt: "Creative Assembly выпустит последнее дополнение к трилогии.",
+        date: "1 апреля 2025",
+        genre: "strategy",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "total-war-warhammer-3"
+      },
+      {
+        title: "Stardew Valley 1.6 — обновление с мультиплеером",
+        excerpt: "Eric Barone анонсировал крупное обновление для культовой инди-игры.",
+        date: "3 апреля 2025",
+        genre: "indie",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "stardew-valley-1-6"
+      },
+      {
+        title: "Diablo IV: Vessel of Hatred — дата выхода",
+        excerpt: "Blizzard подтвердила релиз дополнения на 10 октября 2025.",
+        date: "30 апреля 2025",
+        genre: "rpg",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "diablo-4-vessel"
+      },
+      {
+        title: "Final Fantasy VII Rebirth — выход на PC",
+        excerpt: "Square Enix анонсировала PC-версию на 23 января 2026 года.",
+        date: "2 мая 2025",
+        genre: "rpg",
+        type: "news",
+        image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&h=200&q=80",
+        slug: "final-fantasy-7-rebirth"
+      }
+    ];
+
+    // Фильтрация и рендер
+    function renderGames(tab = 'news', genre = 'all', search = '') {
+      const container = document.getElementById('games-container');
+      container.innerHTML = '';
+
+      let filtered = games.filter(g => g.type === tab);
+
+      if (genre !== 'all') {
+        filtered = filtered.filter(g => g.genre === genre);
+      }
+
+      if (search) {
+        const term = search.toLowerCase();
+        filtered = filtered.filter(g => 
+          g.title.toLowerCase().includes(term) || 
+          g.excerpt.toLowerCase().includes(term)
+        );
+      }
+
+      filtered.forEach(game => {
+        const card = document.createElement('div');
+        card.className = 'game-card';
+        card.innerHTML = `
+          <img src="${game.image}" alt="${game.title}" class="game-image" loading="lazy">
+          <div class="game-content">
+            <h3 class="game-title">${game.title}</h3>
+            <p class="game-excerpt">${game.excerpt}</p>
+            <div class="meta">
+              <span>${game.date}</span>
+              <span>${game.genre === 'action' ? 'Экшен' : game.genre === 'rpg' ? 'RPG' : game.genre === 'strategy' ? 'Стратегия' : 'Инди'}</span>
+            </div>
+          </div>
+          <a href="game/${game.slug}.html" target="_blank" class="overlay-link" aria-label="Открыть ${game.title}"></a>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Переключение темы
+    const toggle = document.getElementById('theme-toggle');
+    const icon = toggle.querySelector('i');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+      if (document.body.classList.contains('light-theme')) {
+        icon.className = 'fas fa-sun';
+      } else {
+        icon.className = 'fas fa-moon';
+      }
+    });
+
+    // Поиск
+    document.getElementById('search').addEventListener('input', (e) => {
+      const activeTab = document.querySelector('.tab.active').dataset.tab;
+      renderGames(activeTab, 'all', e.target.value);
+    });
+
+    // Вкладки
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderGames(tab.dataset.tab);
+      });
+    });
+
+    // Фильтр по жанрам
+    document.querySelectorAll('[data-genre]').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const genre = item.dataset.genre;
+        const activeTab = document.querySelector('.tab.active').dataset.tab;
+        renderGames(activeTab, genre);
+      });
+    });
+
+    // Инициализация
+    renderGames();
+  </script>
 </body>
 </html>
