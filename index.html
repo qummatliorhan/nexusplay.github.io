@@ -49,6 +49,65 @@
       position: relative;
     }
 
+    /* Фоновая карта из игр */
+    .game-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .game-bg img {
+      position: absolute;
+      opacity: 0.15;
+      filter: blur(2px);
+      transition: transform 0.5s ease;
+    }
+
+    .game-bg img:hover {
+      opacity: 0.25;
+      transform: scale(1.05);
+    }
+
+    .game-bg .top-left {
+      top: 10%;
+      left: 5%;
+      width: 200px;
+      height: auto;
+    }
+
+    .game-bg .top-right {
+      top: 5%;
+      right: 5%;
+      width: 200px;
+      height: auto;
+    }
+
+    .game-bg .bottom-left {
+      bottom: 5%;
+      left: 5%;
+      width: 200px;
+      height: auto;
+    }
+
+    .game-bg .bottom-right {
+      bottom: 10%;
+      right: 5%;
+      width: 200px;
+      height: auto;
+    }
+
+    .game-bg .center {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: auto;
+    }
+
     .hero {
       height: 350px;
       background: var(--parallax-bg);
@@ -57,6 +116,8 @@
       justify-content: center;
       text-align: center;
       color: white;
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
@@ -319,6 +380,15 @@
   </style>
 </head>
 <body>
+
+<!-- Фоновая карта из игр -->
+<div class="game-bg">
+  <img src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1i74tu.img?w=768&h=768&m=6" alt="Avowed" class="top-left">
+  <img src="https://i.playground.ru/e/PsjRg4LJgNlFoF5N0E1IHw.jpeg" alt="Black Ops 6" class="top-right">
+  <img src="https://i.playground.ru/e/dXvfJo4FaiP1KdiW9Ms7rw.jpeg" alt="Cyberpunk 2078" class="bottom-left">
+  <img src="https://steamuserimages-a.akamaihd.net/ugc/53576717526320125/F8F4B7F3C930D98F838C19F3EE69F3913C25F6FC/?imw=512&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="Diablo 4" class="bottom-right">
+  <img src="https://i.playground.ru/p/PtErdlhdoqEZ3xLesI72-g.png" alt="Elden Ring" class="center">
+</div>
 
 <div class="hero">
   <div class="hero-content">
