@@ -49,7 +49,7 @@
       position: relative;
     }
 
-    /* Фоновая карта из всех 15 игр */
+    /* Фоновая карта из всех 15 игр — на весь экран */
     .game-bg {
       position: fixed;
       top: 0;
@@ -63,45 +63,24 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
+      background: var(--parallax-bg);
     }
 
     .game-bg img {
-      width: 120px;
-      height: auto;
-      opacity: 0.1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.15;
       filter: blur(2px);
       transition: transform 0.5s ease;
     }
 
     .game-bg img:hover {
-      opacity: 0.2;
-      transform: scale(1.1);
+      opacity: 0.25;
+      transform: scale(1.05);
     }
 
-    /* Анимированный вихрь логотипов компаний */
-    .logo-whirl {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1000;
-      pointer-events: none;
-      display: none;
-    }
-
-    .logo-whirl img {
-      width: 60px;
-      height: auto;
-      opacity: 0.3;
-      animation: spin 10s linear infinite;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* Название сайта в центре (цветное, размытое) */
+    /* Название сайта в центре — цветное, с градиентом и анимацией */
     .nexusplay-center {
       position: fixed;
       top: 50%;
@@ -118,6 +97,12 @@
       pointer-events: none;
       z-index: 1000;
       transition: opacity 0.5s ease;
+      animation: pulse 3s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+      to { text-shadow: 0 0 30px rgba(255, 255, 255, 0.7); }
     }
 
     /* Стиль для второй страницы */
@@ -129,6 +114,7 @@
       display: none;
       margin-top: 1.5rem;
       border: 1px solid rgba(106, 13, 173, 0.3);
+      position: relative;
     }
 
     .game-page img {
@@ -394,7 +380,7 @@
 </head>
 <body>
 
-<!-- Фоновая карта из всех 15 игр -->
+<!-- Фоновая карта из всех 15 игр — на весь экран -->
 <div class="game-bg">
   <img src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1i74tu.img?w=768&h=768&m=6" alt="Avowed">
   <img src="https://i.playground.ru/e/PsjRg4LJgNlFoF5N0E1IHw.jpeg" alt="Black Ops 6">
@@ -411,15 +397,6 @@
   <img src="https://i.ytimg.com/vi/I92CgvoMels/maxresdefault.jpg" alt="Starfield">
   <img src="https://files.vgtimes.ru/download/posts/2022-09/thumbs/1663590378_in_article_94ad6a0b0f.webp" alt="Total War">
   <img src="https://i.ytimg.com/vi/KPaPoHgOOH8/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGH8gKShxMA8=&rs=AOn4CLAu8tGnh6hPAqeJKCOtyIE-MFbPsQ" alt="Zelda">
-</div>
-
-<!-- Анимированный вихрь логотипов компаний -->
-<div class="logo-whirl">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Sony_Computer_Entertainment_logo.svg" alt="Sony">
-  <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Nintendo.svg/1200px-Nintendo.svg.png" alt="Nintendo">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Xbox_logo.svg" alt="Xbox">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Electronic_Arts_Logo.svg" alt="EA">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Ubisoft_logo.svg" alt="Ubisoft">
 </div>
 
 <!-- Цветное название в центре (появляется на второй странице) -->
@@ -664,7 +641,6 @@
   const gamePagesContainer = document.getElementById('game-pages');
   const genresList = document.getElementById('genres-list');
   const nexusplayCenter = document.getElementById('nexusplay-center');
-  const logoWhirl = document.querySelector('.logo-whirl');
 
   function renderGames(gamesToShow) {
     gamesContainer.innerHTML = '';
@@ -703,9 +679,8 @@
     `;
     document.getElementById('current-game-page').style.display = 'block';
 
-    // Показываем цветное название и вихрь логотипов
+    // Показываем цветное название
     nexusplayCenter.style.opacity = '1';
-    logoWhirl.style.display = 'block';
   }
 
   function goBackHome() {
@@ -714,9 +689,8 @@
     document.getElementById('home').classList.add('active');
     renderGames(games);
 
-    // Скрываем цветное название и вихрь логотипов
+    // Скрываем цветное название
     nexusplayCenter.style.opacity = '0';
-    logoWhirl.style.display = 'none';
   }
 
   function renderGenres() {
