@@ -49,7 +49,7 @@
       position: relative;
     }
 
-    /* Фоновый коллаж из 15 игр */
+    /* Фоновый коллаж из 30 игр (дублируем 15 игр для 6x5 сетки) */
     .game-bg {
       position: fixed;
       top: 0;
@@ -59,8 +59,8 @@
       z-index: -1;
       pointer-events: none;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(3, 1fr);
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(5, 1fr);
       gap: 0;
     }
 
@@ -68,17 +68,17 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.2;
+      opacity: 0.15;
       filter: blur(2px);
       transition: transform 0.5s ease;
     }
 
     .game-bg img:hover {
-      opacity: 0.3;
+      opacity: 0.25;
       transform: scale(1.05);
     }
 
-    /* Название сайта в центре — с игровыми цветами */
+    /* Название сайта в центре — с игровыми цветами и анимацией */
     .nexusplay-center {
       position: fixed;
       top: 50%;
@@ -379,8 +379,24 @@
 </head>
 <body>
 
-<!-- Фоновый коллаж из 15 игр -->
+<!-- Фоновый коллаж из 30 игр (дублируем 15 игр для 6x5 сетки) -->
 <div class="game-bg">
+  <img src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1i74tu.img?w=768&h=768&m=6" alt="Avowed">
+  <img src="https://i.playground.ru/e/PsjRg4LJgNlFoF5N0E1IHw.jpeg" alt="Black Ops 6">
+  <img src="https://i.playground.ru/e/dXvfJo4FaiP1KdiW9Ms7rw.jpeg" alt="Cyberpunk 2078">
+  <img src="https://steamuserimages-a.akamaihd.net/ugc/53576717526320125/F8F4B7F3C930D98F838C19F3EE69F3913C25F6FC/?imw=512&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" alt="Diablo 4">
+  <img src="https://i.playground.ru/p/PtErdlhdoqEZ3xLesI72-g.png" alt="Elden Ring">
+  <img src="https://i.pinimg.com/originals/f4/42/ca/f442cab86b3b3422e999ac339fd2b022.jpg" alt="Fable">
+  <img src="https://cdn1.epicgames.com/offer/e9a679451d094c1ba3d008b6a01adec5/EGS_FINALFANTASYVIIREBIRTH_SquareEnix_S1_2560x1440-e254f978084058f898118dc49728d04c" alt="Final Fantasy 7">
+  <img src="https://avatars.mds.yandex.net/i?id=16ed725514f07003dd58657bd3826b58_l-5910330-images-thumbs&n=13" alt="GTA 6">
+  <img src="https://i.ytimg.com/vi/SBXso04n1Zg/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgRihNMA8=&rs=AOn4CLBgKqkR_qHk9l13XgeS0-OSuSF90Q" alt="Hades 2">
+  <img src="https://comicbook.com/wp-content/uploads/sites/4/2025/09/Hollow-Knight-Silksong.jpg" alt="Hollow Knight">
+  <img src="https://i.ytimg.com/vi/SoY35ltBeKs/maxresdefault.jpg" alt="Palworld 2">
+  <img src="https://vkplay.ru/hotbox/content_files/news/2020/02/12/fe52b98a1367439ea2be293fcf48224a.jpg" alt="Stardew Valley">
+  <img src="https://i.ytimg.com/vi/I92CgvoMels/maxresdefault.jpg" alt="Starfield">
+  <img src="https://files.vgtimes.ru/download/posts/2022-09/thumbs/1663590378_in_article_94ad6a0b0f.webp" alt="Total War">
+  <img src="https://i.ytimg.com/vi/KPaPoHgOOH8/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGH8gKShxMA8=&rs=AOn4CLAu8tGnh6hPAqeJKCOtyIE-MFbPsQ" alt="Zelda">
+  <!-- Дублируем для 30 картинок -->
   <img src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1i74tu.img?w=768&h=768&m=6" alt="Avowed">
   <img src="https://i.playground.ru/e/PsjRg4LJgNlFoF5N0E1IHw.jpeg" alt="Black Ops 6">
   <img src="https://i.playground.ru/e/dXvfJo4FaiP1KdiW9Ms7rw.jpeg" alt="Cyberpunk 2078">
