@@ -49,7 +49,7 @@
       position: relative;
     }
 
-    /* Фоновая карта из всех 15 игр — на весь экран */
+    /* Фоновый коллаж из 15 игр */
     .game-bg {
       position: fixed;
       top: 0;
@@ -58,29 +58,27 @@
       height: 100%;
       z-index: -1;
       pointer-events: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      background: var(--parallax-bg);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 0;
     }
 
     .game-bg img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.15;
+      opacity: 0.2;
       filter: blur(2px);
       transition: transform 0.5s ease;
     }
 
     .game-bg img:hover {
-      opacity: 0.25;
+      opacity: 0.3;
       transform: scale(1.05);
     }
 
-    /* Название сайта в центре — цветное, с градиентом и анимацией */
+    /* Название сайта в центре — с игровыми цветами */
     .nexusplay-center {
       position: fixed;
       top: 50%;
@@ -88,7 +86,7 @@
       transform: translate(-50%, -50%);
       font-size: 3rem;
       font-weight: 800;
-      background: linear-gradient(to right, #ff7e5f, #feb47b, #6a0dad, #8a2be2);
+      background: linear-gradient(to right, #ff7e5f, #feb47b, #6a0dad, #8a2be2, #00c9ff, #92fe9d);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -115,6 +113,7 @@
       margin-top: 1.5rem;
       border: 1px solid rgba(106, 13, 173, 0.3);
       position: relative;
+      z-index: 1001;
     }
 
     .game-page img {
@@ -380,7 +379,7 @@
 </head>
 <body>
 
-<!-- Фоновая карта из всех 15 игр — на весь экран -->
+<!-- Фоновый коллаж из 15 игр -->
 <div class="game-bg">
   <img src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1i74tu.img?w=768&h=768&m=6" alt="Avowed">
   <img src="https://i.playground.ru/e/PsjRg4LJgNlFoF5N0E1IHw.jpeg" alt="Black Ops 6">
