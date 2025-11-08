@@ -379,7 +379,7 @@
 </head>
 <body>
 
-<!-- Фоновый коллаж из 30 игр (дублируем 15 игр для 6x5 сетки) -->
+<!-- Фоновый коллаж из 30 игр (дублируем 15 ваших ссылок) -->
 <div class="game-bg">
   <img src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1i74tu.img?w=768&h=768&m=6" alt="Avowed">
   <img src="https://i.playground.ru/e/PsjRg4LJgNlFoF5N0E1IHw.jpeg" alt="Black Ops 6">
@@ -670,7 +670,10 @@
           <div class="game-desc">${game.shortDesc}</div>
         </div>
       `;
-      card.addEventListener('click', () => showGamePage(game));
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showGamePage(game);
+      });
       gamesContainer.appendChild(card);
     });
   }
